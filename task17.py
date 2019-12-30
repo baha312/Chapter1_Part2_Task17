@@ -1,22 +1,30 @@
-a=input("Enter your word:").lower()
-if a=='hello':
-    print('1 -google_kz.txt 2-google_paris.txt 3-google_uar.txt')
-    b=int(input())
-    if b==1:
-        myfile1 = open('google_kz.txt','w')
-        print("Name of a file is: ",myfile1.name)
-        myfile1.write(input())
-        print(myfile1)
-        myfile1.close()
-    elif b==2:
-        myfile2=open('google_paris.txt','w')
-        print("Name of a file is: ",myfile2.name)
-        myfile2.write(input())
-        print(myfile2)
-        myfile2.close()
-    elif b==3:
-        myfile3=open('google-uar.txt', 'w')
-        print("Name of a file is: ",myfile3.name)
-        myfile3.write(input())
-        print(myfile3)
-        myfile3.close()
+def complains():
+    google_branches = {1: 'google_kazakhstan.txt',
+                       2: 'google_paris.txt',
+                       3: 'google_kyrgyzstan.txt',
+                       4: 'google_san_francisco.txt',
+                       5: 'google_germany.txt',
+                       6: 'google_moscow.txt',
+                       7: 'google_sweden.txt'
+                       }
+    print("Enter a number: ")
+    for key, value in google_branches.items():
+        office = value.replace('_', ' ').title()
+        print(f"{key}:{office.replace('.Txt','')}")
+
+    user_choice = int(input("Enter branch num:"))
+
+
+    try:
+
+        office = google_branches[user_choice]
+        user_text = input("Enter your text:")
+        with open(office, 'w') as the_file:
+            the_file.write(user_text)
+        print("Thanks for feedback")
+    except KeyError:
+        print("Choose from the list above")
+        complains()
+
+
+complains()
